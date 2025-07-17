@@ -1,0 +1,29 @@
+.div1 {
+  background-color: aquamarine;
+  display: flex;
+  flex-direction: column;
+  padding: 65px;
+  width: 100px;
+  height: 100%; 
+}
+
+.ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 80px; 
+}
+
+.li {
+  padding: 0px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif ;
+  font-size: 2em;
+}
+
+.li:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}

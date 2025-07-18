@@ -1,48 +1,109 @@
-import { useState } from 'react'
-//import './App.css'
-import AlertHistory from './AlertHistory'
-import Navbar from './components/navbar'
-import Dataentry from './components/DataEntry'
-import Update from './components/updateordelete/update'
-import {BrowserRouter,Routes,Route,Link} from 'react-router-dom'
-import Updatedeep from './components/updateordelete/update-deep'
-import Threshold from  './threshold'
-import ThresholdDeep from './threshold-deep'
-import Used from './used'
-import UsedDeep from './used-deep'
+import { useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+// Universal pages
+import Navbar from './Navbar';
+import Dashboard from './Dashboard';
+import Stock from './Stock';
+import AlertHistory from './AlertHistory';
+
+// Data Entry hub and sub-pages
+import DataEntryMenu from './DataEntryMenu';
+import DataEntry from './components/DataEntry';
+import Update from './components/updateordelete/update';
+import Updatedeep from './components/updateordelete/update-deep';
+import Threshold from './threshold';
+import ThresholdDeep from './threshold-deep';
+import Used from './used';
+import UsedDeep from './used-deep';
+
+// Sub-navbar
+import DataEntryNavbar from './DataEntryNav';
 
 function App() {
-  const [materials,setMaterials]=useState([]);
-  
+  const [materials, setMaterials] = useState([]);
 
   return (
-    <>
-    
-     <BrowserRouter>
-     <Link to="/Update">Go to Update Page</Link><br />
-     <Link to="/DataEntry">Go to Dataentry Page</Link><br />
-     
-     <Link to="/threshold">Go to Threshold</Link><br />
-     <Link to="/used">Go to used</Link><br />
+    <BrowserRouter>
+      <Navbar />
 
-     <Link to="/AlertHistory">Go to Alert History Page</Link><br />
-            <Routes>
-              <Route path='/DataEntry' element={<Dataentry materials={materials} setMaterials={setMaterials}/>} />
-              <Route path='/Update' element={<Update materials={materials}/>}/>
-              <Route path='/Update-deep' element={<Updatedeep materials={materials} setMaterials={setMaterials}/>}/>
-            
-                     <Route path="/threshold" element={<Threshold materials={materials} />}></Route>
-                     <Route path="/threshold-deep" element={<ThresholdDeep materials={materials} setMaterials={setMaterials}/>}></Route>
-                     <Route path="/used" element={<Used materials={materials} setMaterials={setMaterials}/>}></Route>
-                     <Route path="/used-deep" element={<UsedDeep materials={materials} setMaterials={setMaterials}/>}></Route>
-              
-              <Route path='/AlertHistory' element={<AlertHistory materials={materials} setMaterials={setMaterials}/>} />
-            </Routes>
-     </BrowserRouter>
-     
-      
-    </>
-  )
+      <Routes>
+        {/* === Main Pages === */}
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/stock" element={<Stock />} />
+        <Route path="/dataentry" element={<DataEntryMenu />} />
+        <Route
+          path="/alerthistory"
+          element={<AlertHistory materials={materials} setMaterials={setMaterials} />}
+        />
+
+        {/* === Data Entry Sub-pages with Navbar === */}
+        <Route
+          path="/dataentry/new"
+          element={
+            <>
+              <DataEntryNavbar />
+              <DataEntry materials={materials} setMaterials={setMaterials} />
+            </>
+          }
+        />
+        <Route
+          path="/update"
+          element={
+            <>
+              <DataEntryNavbar />
+              <Update materials={materials} />
+            </>
+          }
+        />
+        <Route
+          path="/update-deep"
+          element={
+            <>
+              <DataEntryNavbar />
+              <Updatedeep materials={materials} setMaterials={setMaterials} />
+            </>
+          }
+        />
+        <Route
+          path="/threshold"
+          element={
+            <>
+              <DataEntryNavbar />
+              <Threshold materials={materials} />
+            </>
+          }
+        />
+        <Route
+          path="/threshold-deep"
+          element={
+            <>
+              <DataEntryNavbar />
+              <ThresholdDeep materials={materials} setMaterials={setMaterials} />
+            </>
+          }
+        />
+        <Route
+          path="/used"
+          element={
+            <>
+              <DataEntryNavbar />
+              <Used materials={materials} setMaterials={setMaterials} />
+            </>
+          }
+        />
+        <Route
+          path="/used-deep"
+          element={
+            <>
+              <DataEntryNavbar />
+              <UsedDeep materials={materials} setMaterials={setMaterials} />
+            </>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;

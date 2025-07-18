@@ -15,6 +15,7 @@ function Used({materials,setMaterials}){
                 }
 
         return (<>
+        <div className="page-fade-in">
                 <div  className="used">
                                 <p className="used-title">Material Used</p>
                                 <input  placeholder="Search by Id" value={items} onChange={(e)=>handleChange(e)}></input>
@@ -32,6 +33,7 @@ function Used({materials,setMaterials}){
                                 
                 
                             </div>
+        </div>
         </>)
 }
 export default Used

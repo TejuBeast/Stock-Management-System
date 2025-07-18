@@ -28,6 +28,7 @@ function UpdateDeep({ materials, setMaterials }) {
 
 return (
   // New wrapper to hold both the form and the delete footer
+  <div className="page-fade-in">
   <div className="edit-material-page">
     <div className="update-deep">
       <h2 className='title'>Update and Delete</h2>
@@ -62,6 +63,7 @@ return (
       <p>Alternatively, you can permanently remove this material.</p>
       <button className='deletebtn' onClick={handleDelete}>Delete Material</button>
     </div>
+  </div>
   </div>
 );
 }

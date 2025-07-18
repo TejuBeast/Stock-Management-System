@@ -27,6 +27,7 @@ function ThresholdDeep({ materials, setMaterials }) {
 //};
 
   return (
+    <div className="page-fade-in">
     <div className="threshold-deep">
       <h2 className='title'>Threshold Value</h2>
       <p><strong>ID:</strong> {form.id}</p>
@@ -38,6 +39,7 @@ function ThresholdDeep({ materials, setMaterials }) {
       <button className='updatebtn' onClick={handleUp}>Update</button>
 
       {/* You can now add inputs to update this if needed */}
+    </div>
     </div>
   );
 }

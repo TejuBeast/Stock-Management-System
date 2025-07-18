@@ -9,6 +9,14 @@
   text-align: center;
 }
 
+.title {
+  text-align: center;
+  color: #333;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-size: 1.6rem;
+}
+
 .i1 {
   width: 95%;
   padding: 12px 15px;

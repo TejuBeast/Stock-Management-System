@@ -11,6 +11,7 @@ export default function AlertHistory() {
   }, []);
 
   return (
+    <div className="page-fade-in">
     <div className="alert-history-container">
       <h2 className="alert-history-title">🚨 Alert History</h2>
 
@@ -36,6 +37,7 @@ export default function AlertHistory() {
       ) : (
         !error && <p>📭 No alerts yet.</p>
       )}
+    </div>
     </div>
   );
 }

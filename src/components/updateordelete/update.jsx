@@ -14,8 +14,9 @@ function Update({materials}){
             navi('/update-deep', { state: { material } });
         }
         return(
+            <div className="page-fade-in">
             <div className={Styles.div}>
-                <p className={Styles.title}>Update component</p>
+                <p className={Styles.title}>Update and Delete</p>
                 <input className={Styles.i1} placeholder="Search by Id" value={items} onChange={(e)=>handleChange(e)}></input>
                 {filteredMaterials.length===0?(<p className={Styles.noMatch}>No matching materials</p>):(
                     filteredMaterials.map((item,index)=>(
@@ -30,6 +31,7 @@ function Update({materials}){
                 
                 
 
+            </div>
             </div>
         )
 }

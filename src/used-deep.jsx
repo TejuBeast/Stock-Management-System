@@ -27,6 +27,7 @@ function UsedDeep({ materials, setMaterials }) {
 //};
 
   return (
+    <div className="page-fade-in">
     <div className='used-deep'>
       <h2 className='title'>Used Material Amount</h2>
       <p><strong>Id:</strong> {form.id}</p>
@@ -38,6 +39,7 @@ function UsedDeep({ materials, setMaterials }) {
       <button className='updatebtn' onClick={handleUp}>Update</button>
 
       {/* You can now add inputs to update this if needed */}
+    </div>
     </div>
   );
 }

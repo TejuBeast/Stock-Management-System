@@ -14,6 +14,7 @@ function Threshold({materials,setMaterials}){
                 }
 
         return (<>
+        <div className="page-fade-in">
                 <div  className="threshold">
                                 <p  className="threshold-title">Threshold</p>
                                 <input  placeholder="Search by Id" value={items} onChange={(e)=>handleChange(e)}></input>
@@ -31,6 +32,7 @@ function Threshold({materials,setMaterials}){
                                 
                 
                             </div>
+        </div>
         </>)
 }
 export default Threshold

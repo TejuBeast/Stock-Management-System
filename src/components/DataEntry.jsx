@@ -20,7 +20,9 @@ function Dataentry({materials,setMaterials}){
 
     return(
         <>
+        <div className="page-fade-in">
         <div className={styles.div}>
+            <h3 className={styles.title}>Data Entry</h3>
             <input className={styles.i1} type='text' name='name'
             placeholder='Name' value={form.name} onChange={handleChange}>
             </input>
@@ -47,6 +49,7 @@ function Dataentry({materials,setMaterials}){
               ))}
             </div>
             
+        </div>
         </div>
         </>
     )

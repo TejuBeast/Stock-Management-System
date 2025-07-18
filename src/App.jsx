@@ -1,5 +1,6 @@
 import { useState } from 'react'
 //import './App.css'
+import AlertHistory from './AlertHistory'
 import Navbar from './components/navbar'
 import Dataentry from './components/DataEntry'
 import Update from './components/updateordelete/update'
@@ -20,9 +21,11 @@ function App() {
      <BrowserRouter>
      <Link to="/Update">Go to Update Page</Link><br />
      <Link to="/DataEntry">Go to Dataentry Page</Link><br />
+     
      <Link to="/threshold">Go to Threshold</Link><br />
-     <Link to="/used">Go to used</Link>
+     <Link to="/used">Go to used</Link><br />
 
+     <Link to="/AlertHistory">Go to Alert History Page</Link><br />
             <Routes>
               <Route path='/DataEntry' element={<Dataentry materials={materials} setMaterials={setMaterials}/>} />
               <Route path='/Update' element={<Update materials={materials}/>}/>
@@ -33,6 +36,7 @@ function App() {
                      <Route path="/used" element={<Used materials={materials} setMaterials={setMaterials}/>}></Route>
                      <Route path="/used-deep" element={<UsedDeep materials={materials} setMaterials={setMaterials}/>}></Route>
               
+              <Route path='/AlertHistory' element={<AlertHistory materials={materials} setMaterials={setMaterials}/>} />
             </Routes>
      </BrowserRouter>
      

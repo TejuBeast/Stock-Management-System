@@ -42,7 +42,7 @@ function Dataentry({materials,setMaterials}){
                   <p><strong>Material_Id:</strong> {mat.id}</p>
                   <p><strong>Availability:</strong> {mat.availability}</p>
                   <p><strong>Threshold:</strong> {mat.threshold}</p>
-                  <p><strong>Used:</strong> {mat.used="NA"}</p>
+                  <p><strong>Used:</strong> {mat.used}</p>
               </div>
               ))}
             </div>

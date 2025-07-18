@@ -1,0 +1,108 @@
+/* --- New Page Wrapper --- */
+.edit-material-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+/* --- General Card & Font --- */
+.update-deep {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  width: 100%;
+  max-width: 420px;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e9ecef;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 600;
+  text-align: center;
+  color: #212529;
+  margin-top: 0;
+  margin-bottom: 35px;
+}
+
+/* --- Info & Input Styles (remain the same) --- */
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid #f1f3f5;
+  font-size: 16px;
+}
+.input-group {
+  margin-top: 25px;
+  margin-bottom: 30px;
+}
+.input-group label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+.input-group input {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+/* --- Button Styles --- */
+
+/* Full-width primary "Update" button */
+.updatebtn {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  background-color: #28a745;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.updatebtn:hover {
+  background-color: #218838;
+}
+
+/* --- New Delete Section --- */
+.delete-section {
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #e9ecef;
+}
+
+.delete-section p {
+  font-size: 14px;
+  color: #6c757d;
+  margin: 0 0 15px 0;
+}
+
+/* De-emphasized "Delete" button (looks like a link) */
+.deletebtn {
+  font-size: 14px;
+  font-weight: 600;
+  color: #e63946; /* Red text */
+  background: none;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background-color 0.2s, text-decoration 0.2s;
+}
+
+.deletebtn:hover {
+  background-color: #f8d7da; /* Light red background on hover */
+  text-decoration: underline;
+}

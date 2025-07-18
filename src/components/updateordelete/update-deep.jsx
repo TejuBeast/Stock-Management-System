@@ -1,5 +1,6 @@
 import { useLocation ,useNavigate} from 'react-router-dom';
 import { useState } from 'react';
+import './update-deep.css';
 
 function UpdateDeep({ materials, setMaterials }) {
   const location = useLocation();
@@ -25,21 +26,44 @@ function UpdateDeep({ materials, setMaterials }) {
   navigate('/update');
 };
 
-  return (
-    <div>
-      <h2>Edit Material</h2>
-      <p><strong>ID:</strong> {form.id}</p>
-      <p><strong>Name:</strong>
-          {form.name}</p>
-      <p><strong>Availability:</strong> <input type="text"
+return (
+  // New wrapper to hold both the form and the delete footer
+  <div className="edit-material-page">
+    <div className="update-deep">
+      <h2 className='title'>Update and Delete</h2>
+
+      <div className="info-row">
+        <strong>ID:</strong>
+        <span>{form.id}</span>
+      </div>
+      <div className="info-row">
+        <strong>Name:</strong>
+        <span>{form.name}</span>
+      </div>
+
+      <div className="input-group">
+        <label htmlFor="availability"><strong>Availability:</strong></label>
+        <input
+          id="availability"
+          type="text"
           name="availability"
           value={form.availability}
-          onChange={handleChange} placeholder= {form.availability}/></p>
-      <button onClick={handleUp}>Update</button> <button onClick={handleDelete}>Delete</button>
+          onChange={handleChange}
+          placeholder={form.availability}
+        />
+      </div>
 
-      {/* You can now add inputs to update this if needed */}
+      {/* The update button is now the only primary action in the card */}
+      <button className='updatebtn' onClick={handleUp}>Update Material</button>
     </div>
-  );
+
+    {/* New, separate section for the delete action */}
+    <div className="delete-section">
+      <p>Alternatively, you can permanently remove this material.</p>
+      <button className='deletebtn' onClick={handleDelete}>Delete Material</button>
+    </div>
+  </div>
+);
 }
 
 export default UpdateDeep;

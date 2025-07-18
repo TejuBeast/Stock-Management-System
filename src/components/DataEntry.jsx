@@ -3,7 +3,7 @@ import { useState } from 'react'
 
 function Dataentry({materials,setMaterials}){
     
-    const [form,setForm]=useState({name: '', id: '' ,availability: ''})
+    const [form,setForm]=useState({name: '', id: '' ,availability: '',threshold:'',used:''})
    
     const handleChange=(e)=>{
         const {name,value}=e.target;
@@ -11,9 +11,9 @@ function Dataentry({materials,setMaterials}){
 
     }
     const handleAdd = () => {
-    if (form.name && form.availability && form.id) {
+    if (form.name && form.availability && form.id&&form.threshold) {
       setMaterials([...materials, form]);// material is a array because it is the data storage fornow
-      setForm({ name: '', id: '' ,availability: ''}); // Clear form
+      setForm({ name: '', id: '' ,availability: '',threshold:'',used:''}); // Clear form
     }
    
   };
@@ -29,6 +29,9 @@ function Dataentry({materials,setMaterials}){
             <input className={styles.i1} type='text' name='availability'
             placeholder='Availability' 
             value={form.availability} onChange={handleChange}/>
+            <input className={styles.i1} type='text' name='threshold'
+            placeholder='Threshold' 
+            value={form.threshold} onChange={handleChange}/>
             <br />
             <button className={styles.btn} onClick={handleAdd}>Submit</button>
             <div className={styles.history}>
@@ -38,6 +41,8 @@ function Dataentry({materials,setMaterials}){
                   <p><strong>Name:</strong> {mat.name}</p>
                   <p><strong>Material_Id:</strong> {mat.id}</p>
                   <p><strong>Availability:</strong> {mat.availability}</p>
+                  <p><strong>Threshold:</strong> {mat.threshold}</p>
+                  <p><strong>Used:</strong> {mat.used="NA"}</p>
               </div>
               ))}
             </div>

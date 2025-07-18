@@ -15,13 +15,13 @@ function App() {
     
      <BrowserRouter>
      <Link to="/Update">Go to Update Page</Link><br />
-     <Link to="/DataEntry">Go to Dataentry Page</Link>
-     <Link to="/AlertHistory">Go to Alert History Page</Link>
+     <Link to="/DataEntry">Go to Dataentry Page</Link><br />
+     <Link to="/AlertHistory">Go to Alert History Page</Link><br />
             <Routes>
               <Route path='/DataEntry' element={<Dataentry materials={materials} setMaterials={setMaterials}/>} />
               <Route path='/Update' element={<Update materials={materials}/>}/>
-              <Route path='/Update-deep' element={<Updatedeep materials={materials}/>}/>
-              <Route path='/AlertHistory' element={<AlertHistory />} />
+              <Route path='/Update-deep' element={<Updatedeep materials={materials} setMaterials={setMaterials}/>}/>
+              <Route path='/AlertHistory' element={<AlertHistory materials={materials} setMaterials={setMaterials}/>} />
             </Routes>
      </BrowserRouter>
      

@@ -10,10 +10,8 @@ function Update({materials}){
         }
         const filteredMaterials=materials.filter((item)=>item.id.includes(items));
 
-        function submit(){
-           
-            navi('/Update-deep')
-
+        const submit=( material)=>{
+            navi('/update-deep', { state: { material } });
         }
         return(
             <div className={Styles.div}>
@@ -21,7 +19,7 @@ function Update({materials}){
                 <input className={Styles.i1} placeholder="Search by Id" value={items} onChange={(e)=>handleChange(e)}></input>
                 {filteredMaterials.length===0?(<p className={Styles.noMatch}>No matching materials</p>):(
                     filteredMaterials.map((item,index)=>(
-                        <div onClick={submit} key={index} className={Styles.update}>
+                        <div onClick={()=>submit(item)} key={index} className={Styles.update}>
                             <p><strong>Name:</strong>  {item.name}</p>
                             <p><strong>Id:</strong>{item.id}</p>
                             <p><strong>Availability:</strong>{item.availability}</p>

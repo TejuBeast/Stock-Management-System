@@ -1,23 +1,72 @@
 
-.update{
-    border: solid 2px;
-    border-radius: 5px;
-    background-color: rgb(210, 246, 234);
-    padding: 20px;
-    margin: 10px;
-    width: 400px;
-    font-size: 20px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+.div{
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
-.update:hover{
-    background-color: rgb(141, 204, 183);
-    cursor: pointer;
+
+.title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-align: center;
+  color: #333;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
 }
-.i1{
-    padding: 10px;
-    font-size: 2em;
-    margin: 0px 20px 20px 20px;
-    border-radius: 5px;
-    border: solid 3px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+.i1 {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 2rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  transition: all 0.2s ease-in-out;
+}
+
+.i1:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+}
+
+.update {
+  background-color: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1rem;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+}
+
+.update:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-color: #007bff;
+}
+
+.update p {
+  margin: 0.6rem 0;
+  color: #555;
+}
+
+.update p strong {
+  color: #333;
+  margin-right: 8px;
+}
+
+.noMatch {
+  color: #777;
+  font-style: italic;
+  text-align: center;
+  padding: 2rem 1rem;
+  background-color: #fafafa;
+  border-radius: 6px;
 }

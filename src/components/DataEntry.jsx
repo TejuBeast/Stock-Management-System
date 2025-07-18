@@ -30,16 +30,17 @@ function Dataentry({materials,setMaterials}){
             placeholder='Availability' 
             value={form.availability} onChange={handleChange}/>
             <br />
-            <button onClick={handleAdd}>Submit</button>
-            <h3>Data-entry history</h3>
-            {materials.map((mat, index) => (
-          <div key={index} className={styles.itemBox} >
-            <p><strong>Name:</strong> {mat.name}</p>
-            <p><strong>Material_Id:</strong> {mat.id}</p>
-            <p><strong>Availability:</strong> {mat.availability}</p>
-          </div>
-        ))}
-
+            <button className={styles.btn} onClick={handleAdd}>Submit</button>
+            <div className={styles.history}>
+              <h3 className={styles.historyTitle}>Data-entry history</h3>
+              {materials.map((mat, index) => (
+              <div key={index} className={styles.itemBox} >
+                  <p><strong>Name:</strong> {mat.name}</p>
+                  <p><strong>Material_Id:</strong> {mat.id}</p>
+                  <p><strong>Availability:</strong> {mat.availability}</p>
+              </div>
+              ))}
+            </div>
             
         </div>
         </>

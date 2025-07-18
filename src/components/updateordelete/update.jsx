@@ -16,10 +16,10 @@ function Update({materials}){
 
         }
         return(
-            <div className={Styles.divi}>
-                <p style={{fontSize:'2em',margin:"20px",fontFamily:"'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"}}>Update component</p>
+            <div className={Styles.div}>
+                <p className={Styles.title}>Update component</p>
                 <input className={Styles.i1} placeholder="Search by Id" value={items} onChange={(e)=>handleChange(e)}></input>
-                {filteredMaterials.length===0?(<p style={{fontSize: "2em",margin:"20px 20px 20px 50px",fontFamily:"'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"}}>No matching materials</p>):(
+                {filteredMaterials.length===0?(<p className={Styles.noMatch}>No matching materials</p>):(
                     filteredMaterials.map((item,index)=>(
                         <div onClick={submit} key={index} className={Styles.update}>
                             <p><strong>Name:</strong>  {item.name}</p>

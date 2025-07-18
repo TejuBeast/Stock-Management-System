@@ -18,7 +18,7 @@ function App() {
             <Routes>
               <Route path='/DataEntry' element={<Dataentry materials={materials} setMaterials={setMaterials}/>} />
               <Route path='/Update' element={<Update materials={materials}/>}/>
-              <Route path='/Update-deep' element={<Updatedeep materials={materials}/>}/>
+              <Route path='/Update-deep' element={<Updatedeep materials={materials} setMaterials={setMaterials}/>}/>
             </Routes>
      </BrowserRouter>
      

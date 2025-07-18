@@ -17,7 +17,7 @@ function ThresholdDeep({ materials, setMaterials }) {
   const handleUp=()=>{
     const updated =materials.map((mat)=>mat.id===form.id?form:mat);
   setMaterials(updated);
-  navigate('/threshold-usage/threshold');
+  navigate('/threshold');
   };
   //const handleDelete = () => {
   //const updated = materials.filter(mat => mat.id !== form.id);

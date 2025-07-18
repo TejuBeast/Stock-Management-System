@@ -1,10 +1,10 @@
 import { useState } from 'react'
 //import './App.css'
-import Navbar from '../components/navbar'
-import Dataentry from '../components/DataEntry'
-import Update from '../components/updateordelete/update'
+import Navbar from './components/navbar'
+import Dataentry from './components/DataEntry'
+import Update from './components/updateordelete/update'
 import {BrowserRouter,Routes,Route,Link} from 'react-router-dom'
-import Updatedeep from '../components/updateordelete/update-deep'
+import Updatedeep from './components/updateordelete/update-deep'
 function App() {
   const [materials,setMaterials]=useState([]);
   

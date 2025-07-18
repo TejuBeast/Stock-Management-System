@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import './threshold.css';
 function Threshold({materials,setMaterials}){
         const navi=useNavigate();
         const [items,setItems]=useState("")
@@ -13,12 +14,12 @@ function Threshold({materials,setMaterials}){
                 }
 
         return (<>
-                <div >
-                                <p >Update component</p>
+                <div  className="threshold">
+                                <p  className="threshold-title">Threshold</p>
                                 <input  placeholder="Search by Id" value={items} onChange={(e)=>handleChange(e)}></input>
                                 {filteredMaterials.length===0?(<p >No matching materials</p>):(
                                     filteredMaterials.map((item,index)=>(
-                                        <div onClick={()=>submit(item)} key={index} style={{cursor:"pointer"}}>
+                                        <div  className="threshold-item" onClick={()=>submit(item)} key={index} style={{cursor:"pointer"}}>
                                             <p><strong>Id:</strong>{item.id}</p>
                                             <p><strong>Name:</strong>{item.name}</p>
                                             <p><strong>Threshold:</strong>{item.threshold}</p>

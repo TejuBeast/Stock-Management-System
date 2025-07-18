@@ -1,5 +1,6 @@
 import { useLocation ,useNavigate} from 'react-router-dom';
 import { useState } from 'react';
+import './used-deep.css';
 
 function UsedDeep({ materials, setMaterials }) {
   const location = useLocation();
@@ -26,15 +27,15 @@ function UsedDeep({ materials, setMaterials }) {
 //};
 
   return (
-    <div>
-      <h2>Edit Material</h2>
+    <div className='used-deep'>
+      <h2 className='title'>Used Material Amount</h2>
       <p><strong>Id:</strong> {form.id}</p>
       <p><strong>Name:</strong> {form.name}</p>
       <p><strong>Used:</strong> <input type="text"
           name="used"
           value={form.used}
           onChange={handleChange} placeholder= {form.used}/></p>
-      <button onClick={handleUp}>Update</button>
+      <button className='updatebtn' onClick={handleUp}>Update</button>
 
       {/* You can now add inputs to update this if needed */}
     </div>

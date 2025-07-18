@@ -1,0 +1,75 @@
+.threshold {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2.5rem;
+  background-color: #ffffff;
+  border: 1px solid #dfe4ea;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.threshold-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-align: center;
+  color: #2d3436;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+
+.threshold input {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 2rem;
+  background-color: #f8f9fa;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  transition: all 0.2s ease-in-out;
+}
+
+.threshold input:focus {
+  background-color: #ffffff;
+  border-color: #4a69bd;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(74, 105, 189, 0.2);
+}
+
+.threshold-item {
+  background-color: #ffffff;
+  border: 1px solid #dfe4ea;
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1rem;
+  text-align: left;
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out, border-color 0.2s ease-out;
+}
+
+.threshold-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-color: #4a69bd;
+}
+
+.threshold-item p {
+  margin: 0.6rem 0;
+  color: #57606f;
+}
+
+.threshold-item p strong {
+  color: #2d3436;
+  min-width: 90px;
+  display: inline-block;
+}
+
+.threshold > p {
+  color: #57606f;
+  font-style: italic;
+  text-align: center;
+  padding: 2rem 1rem;
+  background-color: #f8f9fa;
+  border: 1px dashed #ced4da;
+  border-radius: 6px;
+}

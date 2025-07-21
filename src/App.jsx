@@ -17,11 +17,15 @@ import ThresholdDeep from './threshold-deep';
 import Used from './used';
 import UsedDeep from './used-deep';
 
+
 // Sub-navbar
 import DataEntryNavbar from './DataEntryNav';
+//temp data
+import mockMaterials from './mockMaterials';
+import StockPredictionChart from './mockml';
 
 function App() {
-  const [materials, setMaterials] = useState([]);
+  const [materials, setMaterials] = useState(mockMaterials);
 
   return (
     <BrowserRouter>
@@ -32,11 +36,11 @@ function App() {
         <Route path="/" element={<Dashboard />} />
         <Route path="/stock" element={<Stock />} />
         <Route path="/dataentry" element={<DataEntryMenu />} />
-        <Route
-          path="/alerthistory"
+        <Route path="/ml" element={<StockPredictionChart/>}/>
+        <Route path="/alerthistory"
           element={<AlertHistory materials={materials} setMaterials={setMaterials} />}
         />
-
+        
         {/* === Data Entry Sub-pages with Navbar === */}
         <Route
           path="/dataentry/new"

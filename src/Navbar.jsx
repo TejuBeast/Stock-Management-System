@@ -8,7 +8,7 @@ const Navbar = () => {
     <nav className="main-navbar">
       <h2 className="brand">📦 Stock System</h2>
       <ul className="nav-links">
-        <li><Link to="/">Dashboard</Link></li>
+        <li><Link to="/ml">Dashboard</Link></li>
         <li><Link to="/stock">Stock</Link></li>
         <li><Link to="/dataentry">Data Entry</Link></li>
         <li><Link to="/alerthistory">Alert History</Link></li>

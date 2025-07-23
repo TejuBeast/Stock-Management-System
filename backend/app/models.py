@@ -30,3 +30,19 @@ class StockUsageHistory(Base):
     used_quantity = Column(Integer, nullable=False)
     timestamp = Column(DateTime, default=lambda: datetime.now(IST))
     stock = relationship("Stock", back_populates="usage_history")
+class AlertHistory(Base):
+    __tablename__ = 'alert_history'
+
+    id = Column(Integer, primary_key=True, index=True)
+    casting_type = Column(String(100), nullable=False)
+    threshold = Column(Integer, nullable=False)
+    alert_time = Column(DateTime, default=lambda: datetime.now(IST))
+
+
+class ContactConfig(Base):
+    __tablename__ = "contact_config"
+
+    id = Column(Integer, primary_key=True, index=True)
+    email = Column(String(255), nullable=False)
+    sms_number = Column(String(20), nullable=False)
+    updated_at = Column(DateTime, default=datetime.now)

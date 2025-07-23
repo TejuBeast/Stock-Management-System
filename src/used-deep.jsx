@@ -10,7 +10,7 @@ function UsedDeep({ materials, setMaterials }) {
 
   const [form, setForm] = useState(() => ({
   id: material?.id || "",
-  name: material?.name || "",
+  casting_type: material?.casting_type || "",
   quantity: material?.quantity || 0,
   threshold: material?.threshold || 0,
   used: material?.used ?? "",  // could be 0 or empty string
@@ -57,7 +57,7 @@ function UsedDeep({ materials, setMaterials }) {
         <h2 className="title">Used Material Amount</h2>
 
         <p><strong>ID:</strong> {form.id}</p>
-        <p><strong>Name:</strong> {form.name}</p>
+        <p><strong>Name:</strong> {form.casting_type}</p>
 
         <p>
           <strong>Used:</strong>

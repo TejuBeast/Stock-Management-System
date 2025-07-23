@@ -1,11 +1,12 @@
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.database import get_db, engine
-from app.models import Base
+from app.models import Base, AlertHistory
 import app.crud as crud
-from app.schemas import StockCreate, StockResponse, StockUpdateThreshold, StockDeduct,StockDepletionPredictionResponse
+from app.schemas import StockCreate, StockResponse, StockUpdateThreshold, StockDeduct,StockDepletionPredictionResponse, ContactConfigUpdate#added
 from app import ml_model
 from fastapi.middleware.cors import CORSMiddleware
+from app import alertservice#added
 
 app = FastAPI()
 from pydantic import BaseModel
@@ -40,6 +41,7 @@ def update_stock(stock_id: int, data: QuantityUpdate, db: Session = Depends(get_
     stock_item = crud.update_stock_quantity(db, stock_id, data.quantity)
     if not stock_item:
         raise HTTPException(status_code=404, detail="Stock not found")
+    alertservice.trigger_alert(db, stock_item)#added
     return stock_item
 
 
@@ -59,8 +61,8 @@ def deduct_stock(stock_id: int, data: UsedUpdate, db: Session = Depends(get_db))
         raise HTTPException(status_code=404, detail="Stock not found")
     if result == "insufficient":
         raise HTTPException(status_code=400, detail="Not enough stock available")
+    alertservice.trigger_alert(db, result)#added
     return result
-
 
 @app.put("/stock/{stock_id}/threshold")
 def update_stock_threshold_endpoint(stock_id: int, data: StockUpdateThreshold, db: Session = Depends(get_db)):
@@ -94,3 +96,11 @@ def predict_stock_depletion(stock_id: int, db: Session = Depends(get_db)):
         "predicted_depletion_date": str(depletion_date) if depletion_date else None,
         "usage_trend": trend_data
     }
+@app.get("/alerts")
+def get_all_alerts(db: Session = Depends(get_db)):
+    return db.query(AlertHistory).all()
+
+@app.put("/config/contact")
+def update_contact_config_endpoint(data: ContactConfigUpdate, db: Session = Depends(get_db)):
+    config = crud.set_contact_config(db, data.email, data.sms_number)
+    return {"message": "Contact configuration updated", "config": config}

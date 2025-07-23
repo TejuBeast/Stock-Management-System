@@ -41,7 +41,7 @@ const [materials, setMaterials] = useState([]);
         <Route path="/" element={<Dashboard />} />
         <Route path="/stock" element={<Stock />} />
         <Route path="/dataentry" element={<DataEntryMenu />} />
-        <Route path="/ml" element={<StockPredictionChart/>}/>
+        <Route path="/ml" element={<Dashboard />} />
         <Route path="/alerthistory"
           element={<AlertHistory materials={materials} setMaterials={setMaterials} />}
         />

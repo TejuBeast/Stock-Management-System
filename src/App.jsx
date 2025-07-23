@@ -21,11 +21,16 @@ import UsedDeep from './used-deep';
 // Sub-navbar
 import DataEntryNavbar from './DataEntryNav';
 //temp data
-import mockMaterials from './mockMaterials';
+//import mockMaterials from './mockMaterials';
 import StockPredictionChart from './mockml';
 
 function App() {
-  const [materials, setMaterials] = useState(mockMaterials);
+  // REMOVE mockMaterials if you use backend fully
+// const [materials, setMaterials] = useState(mockMaterials);
+
+// Use empty array and fetch from backend later
+const [materials, setMaterials] = useState([]);
+
 
   return (
     <BrowserRouter>

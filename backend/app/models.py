@@ -15,7 +15,11 @@ class Stock(Base):
     quantity = Column(Integer, nullable=False)
     threshold = Column(Integer, nullable=False, default=0)
     last_updated = Column(DateTime, default=lambda: datetime.now(IST))
-    usage_history = relationship("StockUsageHistory", back_populates="stock")
+    usage_history = relationship(
+        "StockUsageHistory",
+        back_populates="stock",
+        cascade="all, delete-orphan"  
+    )
 
 
 class StockUsageHistory(Base):

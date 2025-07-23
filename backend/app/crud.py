@@ -31,10 +31,17 @@ def update_stock_quantity(db: Session, stock_id: int, quantity: int):
 
 def delete_stock(db: Session, stock_id: int):
     stock_item = get_stock_by_id(db, stock_id)
-    if stock_item:
-        db.delete(stock_item)
-        db.commit()
-    return stock_item
+    if not stock_item:
+        return None
+
+    # First, delete the usage history entries
+    db.query(StockUsageHistory).filter(StockUsageHistory.stock_id == stock_id).delete()
+
+    db.delete(stock_item)
+    db.commit()
+    return {"message": "Deleted successfully"}
+
+
 
 def deduct_stock_quantity(db: Session, stock_id: int, used_quantity: int):
     stock_item = get_stock_by_id(db, stock_id)

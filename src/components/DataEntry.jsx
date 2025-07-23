@@ -1,5 +1,6 @@
 import styles from '../css-comp/DataEntry.module.css'
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
+import axios from "axios"; // import this at the top
 
 function Dataentry({materials,setMaterials}){
     
@@ -11,12 +12,39 @@ function Dataentry({materials,setMaterials}){
 
     }
     const handleAdd = () => {
-    if (form.name && form.availability && form.id&&form.threshold) {
-      setMaterials([...materials, form]);// material is a array because it is the data storage fornow
-      setForm({ name: '', id: '' ,availability: '',threshold:'',used:''}); // Clear form
-    }
-   
-  };
+  if (form.name && form.id && form.availability && form.threshold) {
+    const payload = {
+      stock_id: parseInt(form.id),                      // maps to backend `stock_id`
+      casting_type: form.name,               // maps to backend `casting_type`
+      quantity: parseInt(form.availability), // maps to backend `quantity`
+      threshold: parseInt(form.threshold),   // maps to backend `threshold`
+    };
+    console.log("Payload being sent:", payload);
+
+    axios.post("http://localhost:8000/stock", payload)
+      .then((res) => {
+        console.log("Added successfully:", res.data);
+        setMaterials([...materials, res.data]); // push new material into state
+        setForm({ name: '', id: '', availability: '', threshold: '', used: '' }); // clear form
+      })
+      .catch((err) => {
+        console.error("Error adding material:", err.response?.data || err.message);
+        alert("Error adding material. Check backend or field names.");
+      });
+  }
+};
+     // ✅ Fetch data from backend on component mount
+  useEffect(() => {
+    axios.get("http://localhost:8000/stock")
+      .then(res => {
+        console.log("Fetched materials:", res.data);
+        setMaterials(res.data);
+      })
+      .catch(err => {
+        console.error("Failed to fetch materials:", err);
+        alert("Error fetching materials.");
+      });
+  }, []); // empty dependency array = run once
 
     return(
         <>
@@ -39,14 +67,14 @@ function Dataentry({materials,setMaterials}){
             <div className={styles.history}>
               <h3 className={styles.historyTitle}>Data-entry history</h3>
               {materials.map((mat, index) => (
-              <div key={index} className={styles.itemBox} >
-                  <p><strong>Name:</strong> {mat.name}</p>
-                  <p><strong>Material_Id:</strong> {mat.id}</p>
-                  <p><strong>Availability:</strong> {mat.availability}</p>
-                  <p><strong>Threshold:</strong> {mat.threshold}</p>
-                  <p><strong>Used:</strong> {mat.used}</p>
-              </div>
-              ))}
+  <div key={index} className={styles.itemBox} >
+      <p><strong>Name:</strong> {mat.casting_type}</p>
+      <p><strong>Material_Id:</strong> {mat.id}</p>
+      <p><strong>Availability:</strong> {mat.quantity}</p>
+      <p><strong>Threshold:</strong> {mat.threshold}</p>
+  </div>
+))}
+
             </div>
             
         </div>

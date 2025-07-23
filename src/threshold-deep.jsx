@@ -1,48 +1,70 @@
-import { useLocation ,useNavigate} from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import axios from 'axios';
 import './threshold-deep.css';
 
-function ThresholdDeep({ materials, setMaterials }) {
+function ThresholdDeep() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { material } = location.state;
+  const { material } = location.state || {}; // prevent crash
 
-  // optional: if you want to make it editable
-  const [form, setForm] = useState({ ...material });
-  
-
-  const handleChange=(e)=>{
-    const {name,value}=e.target;
-    setForm((prev)=>({...prev,[name]:value}));
+  // If material was not passed correctly (e.g. on refresh)
+  if (!material) {
+    return (
+      <div style={{ padding: '20px', color: 'red' }}>
+        ❌ No material found. Please go back and select one.
+      </div>
+    );
   }
-  const handleUp=()=>{
-    const updated =materials.map((mat)=>mat.id===form.id?form:mat);
-  setMaterials(updated);
-  navigate('/threshold');
+
+  const [threshold, setThreshold] = useState(material.threshold);
+
+  const handleChange = (e) => {
+    setThreshold(e.target.value);
   };
-  //const handleDelete = () => {
-  //const updated = materials.filter(mat => mat.id !== form.id);
-  //setMaterials(updated);
- // navigate('/threshold');
-//};
+
+  const handleUpdate = async () => {
+    try {
+      await axios.put(`http://localhost:8000/stock/${material.id}/threshold`, {
+        threshold: parseInt(threshold)
+      });
+
+      alert("✅ Threshold updated successfully!");
+      navigate('/threshold');
+    } catch (error) {
+      console.error("❌ Failed to update threshold:", error);
+      alert("Error updating threshold. See console for details.");
+    }
+  };
 
   return (
     <div className="page-fade-in">
-    <div className="threshold-deep">
-      <h2 className='title'>Threshold Value</h2>
-      <p><strong>ID:</strong> {form.id}</p>
-      <p><strong>Name:</strong> {form.name}</p>
-      <p><strong>Threshold:</strong> <input type="text"
-          name="threshold"
-          value={form.threshold}
-          onChange={handleChange} placeholder= {form.threshold}/></p>
-      <button className='updatebtn' onClick={handleUp}>Update</button>
+      <div className="threshold-deep">
+        <h2>Update Threshold</h2>
 
-      {/* You can now add inputs to update this if needed */}
-    </div>
+        <div className="info">
+          <p><strong>ID:</strong> {material.id}</p>
+          <p><strong>Name:</strong> {material.name || material.casting_type}</p>
+          <p><strong>Quantity:</strong> {material.quantity}</p>
+        </div>
+
+        <div className="input-group">
+          <label htmlFor="threshold">New Threshold:</label>
+          <input
+            id="threshold"
+            type="number"
+            value={threshold}
+            onChange={handleChange}
+            placeholder="Enter new threshold"
+          />
+        </div>
+
+        <button className="updatebtn" onClick={handleUpdate}>
+          Update Threshold
+        </button>
+      </div>
     </div>
   );
 }
 
 export default ThresholdDeep;
-

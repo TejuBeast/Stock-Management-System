@@ -8,12 +8,17 @@ from app import ml_model
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+from pydantic import BaseModel
 
+class QuantityUpdate(BaseModel):
+    quantity: int
+class UsedUpdate(BaseModel):
+    used: int
 Base.metadata.create_all(bind=engine)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # React frontend origin
+    allow_origins=["*"],  # React frontend origin
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -31,24 +36,25 @@ def get_all_stock(db: Session = Depends(get_db)):
 
 
 @app.put("/stock/{stock_id}", response_model=StockResponse)
-def update_stock(stock_id: int, quantity: int, db: Session = Depends(get_db)):
-    stock_item = crud.update_stock_quantity(db, stock_id, quantity)
+def update_stock(stock_id: int, data: QuantityUpdate, db: Session = Depends(get_db)):
+    stock_item = crud.update_stock_quantity(db, stock_id, data.quantity)
     if not stock_item:
         raise HTTPException(status_code=404, detail="Stock not found")
     return stock_item
 
 
 @app.delete("/stock/{stock_id}")
-def delete_stock(stock_id: int, db: Session = Depends(get_db)):
-    stock_item = crud.delete_stock(db, stock_id)
-    if not stock_item:
+def delete_stock_endpoint(stock_id: int, db: Session = Depends(get_db)):
+    result = crud.delete_stock(db, stock_id)
+    if result is None:
         raise HTTPException(status_code=404, detail="Stock not found")
-    return {"message": "Stock deleted successfully"}
+    return result
+
 
 
 @app.put("/stock/{stock_id}/deduct", response_model=StockResponse)
-def deduct_stock(stock_id: int, data: StockDeduct, db: Session = Depends(get_db)):
-    result = crud.deduct_stock_quantity(db, stock_id, data.used_quantity)
+def deduct_stock(stock_id: int, data: UsedUpdate, db: Session = Depends(get_db)):
+    result = crud.deduct_stock_quantity(db, stock_id, data.used)
     if result is None:
         raise HTTPException(status_code=404, detail="Stock not found")
     if result == "insufficient":

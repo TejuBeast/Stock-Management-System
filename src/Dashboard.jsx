@@ -1,46 +1,35 @@
-// src/Dashboard.jsx
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import './Dashboard.css';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const materials = [
-  { item_name: 'Casting Mold', quantity: 280, threshold: 300 },
-  { item_name: 'Core Rod', quantity: 450, threshold: 400 },
-  { item_name: 'Shell Frame', quantity: 200, threshold: 250 },
-  { item_name: 'Valve Case', quantity: 610, threshold: 300 },
-  { item_name: 'Wheel Shaft', quantity: 480, threshold: 500 },
-];
-
-const predictedItems = [
-  {
-    item_name: "Flux A",
-    depletion_date: "2025-07-24",
-    days_left: 1,
-    avg_usage: 14.0,
-    current_stock: 12
-  },
-  {
-    item_name: "Steel B",
-    depletion_date: "2025-07-25",
-    days_left: 2,
-    avg_usage: 9.0,
-    current_stock: 20
-  },
-  {
-    item_name: "Aluminium C",
-    depletion_date: "2025-07-27",
-    days_left: 4,
-    avg_usage: 7.5,
-    current_stock: 30
-  }
-];
-
-const THRESHOLD_MARGIN = 100;
+const THRESHOLD_MARGIN = 30;
 
 export default function Dashboard() {
+  const [materials, setMaterials] = useState([]);
+  const [predictedItems, setPredictedItems] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:8000/stock")
+      .then(response => {
+        setMaterials(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching materials:', error);
+      });
+
+    axios.get("http://localhost:8000/high_risk_stocks")
+      .then(response => {
+        setPredictedItems(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching predicted items:', error);
+      });
+  }, []);
+
   const safe = materials.filter(m => m.quantity > m.threshold + THRESHOLD_MARGIN);
   const near = materials.filter(m => m.quantity <= m.threshold + THRESHOLD_MARGIN && m.quantity > m.threshold);
   const critical = materials.filter(m => m.quantity <= m.threshold);
@@ -75,7 +64,7 @@ export default function Dashboard() {
           <table className="summary-table">
             <thead>
               <tr>
-                <th>Item</th>
+                <th>Type</th>
                 <th>Qty</th>
                 <th>Threshold</th>
                 <th>Status</th>
@@ -84,7 +73,7 @@ export default function Dashboard() {
             <tbody>
               {near.concat(critical).map((item, index) => (
                 <tr key={index}>
-                  <td>{item.item_name}</td>
+                  <td>{item.casting_type}</td>
                   <td>{item.quantity}</td>
                   <td>{item.threshold}</td>
                   <td style={{ color: item.quantity <= item.threshold ? 'red' : 'orange' }}>
@@ -107,7 +96,7 @@ export default function Dashboard() {
             <table className="summary-table">
               <thead>
                 <tr>
-                  <th>Item</th>
+                  <th>Type</th>
                   <th>Current Stock</th>
                   <th>Days Left</th>
                   <th>Depletion Date</th>
@@ -116,7 +105,7 @@ export default function Dashboard() {
               <tbody>
                 {predictedToDrop.map((item, index) => (
                   <tr key={index}>
-                    <td>{item.item_name}</td>
+                    <td>{item.casting_type}</td>
                     <td>{item.current_stock}</td>
                     <td style={{ color: item.days_left <= 1 ? 'red' : 'orange' }}>
                       {item.days_left} {item.days_left === 1 ? 'day' : 'days'}
